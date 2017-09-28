@@ -50,7 +50,7 @@ public class Chassis {
 	}
 
 	/**
-	 * ! CALL AT THE END OF LOOP() !
+	 * ! CALL AT THE BEGINNING OF LOOP() !
 	 * This will automatically update telemetry
 	 */
 	public void loop(){

@@ -24,6 +24,8 @@ public class MecanumDrivingTest extends OpMode {
 
 	@Override
 	public void loop(){
+		chassis.loop();
+
 		double rotation = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
 		double robotAngle = Math.atan2(gamepad1.left_stick_x, gamepad1.left_stick_y);
 		double rightX = gamepad1.right_stick_x;
@@ -42,7 +44,5 @@ public class MecanumDrivingTest extends OpMode {
 		telemetry.addData("FR: ", df.format(fr));
 		telemetry.addData("BL: ", df.format(bl));
 		telemetry.addData("BR: ", df.format(br));
-
-		chassis.loop();
 	}
 }
