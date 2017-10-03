@@ -12,7 +12,6 @@ import com.qualcomm.robotcore.hardware.*;
 public class Chassis {
 
 	private OpMode opMode;
-	private HardwareMap hardware;
 
 	//Motors
 	public DcMotor frontLeft;
@@ -24,7 +23,7 @@ public class Chassis {
 
 	public Chassis(OpMode opMode){
 		this.opMode = opMode;
-		this.hardware = opMode.hardwareMap;
+
 	}
 	/**
 	 * ! CALL AT THE BEGINNING OF INIT() !
@@ -35,10 +34,10 @@ public class Chassis {
 		opMode.telemetry.addData("CHASSIS: ", "Starting to Initialize everything...");
 		updateTelementry();
 
-		frontLeft = hardware.dcMotor.get("fl");
-		frontRight = hardware.dcMotor.get("fr");
-		backLeft = hardware.dcMotor.get("bl");
-		backRight = hardware.dcMotor.get("br");
+		frontLeft = opMode.hardwareMap.dcMotor.get("fl");
+		frontRight = opMode.hardwareMap.dcMotor.get("fr");
+		backLeft = opMode.hardwareMap.dcMotor.get("bl");
+		backRight = opMode.hardwareMap.dcMotor.get("br");
 
 		//Assuming that the right motors spin the oppisite way
 		frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
