@@ -21,6 +21,9 @@ public class Chassis {
 	public DcMotor backLeft;
 	public DcMotor backRight;
 
+	//Sensors
+	//OpticalDistanceSensor distanceSensor;
+
 
 
 	public Chassis(OpMode opMode){
@@ -38,6 +41,7 @@ public class Chassis {
 
 		hardwareMap = opMode.hardwareMap;
 
+		//Motors
 		frontLeft = hardwareMap.dcMotor.get("fl");
 		frontRight = hardwareMap.dcMotor.get("fr");
 		backLeft = hardwareMap.dcMotor.get("bl");
@@ -46,6 +50,8 @@ public class Chassis {
 		//Assuming that the right motors spin the oppisite way
 		frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 		backRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
+		//distanceSensor = hardwareMap.opticalDistanceSensor.get("distance");
 
 		opMode.telemetry.addData(CHASSIS_TELEMENTRY_IDENTIFIER, "Initialized everything!");
 
