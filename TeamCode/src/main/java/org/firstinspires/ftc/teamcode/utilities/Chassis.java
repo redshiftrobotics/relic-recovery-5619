@@ -12,6 +12,8 @@ import com.qualcomm.robotcore.hardware.*;
 public class Chassis {
 
 	private OpMode opMode;
+	private HardwareMap hardwareMap;
+	private static final String CHASSIS_TELEMENTRY_IDENTIFIER = "CHASSIS: ";
 
 	//Motors
 	public DcMotor frontLeft;
@@ -31,19 +33,21 @@ public class Chassis {
 	 */
 	public void init(){
 		//Here is where everything gets initialised
-		opMode.telemetry.addData("CHASSIS: ", "Starting to Initialize everything...");
+		opMode.telemetry.addData(CHASSIS_TELEMENTRY_IDENTIFIER, "Starting to Initialize everything...");
 		updateTelementry();
 
-		frontLeft = opMode.hardwareMap.dcMotor.get("fl");
-		frontRight = opMode.hardwareMap.dcMotor.get("fr");
-		backLeft = opMode.hardwareMap.dcMotor.get("bl");
-		backRight = opMode.hardwareMap.dcMotor.get("br");
+		hardwareMap = opMode.hardwareMap;
+
+		frontLeft = hardwareMap.dcMotor.get("fl");
+		frontRight = hardwareMap.dcMotor.get("fr");
+		backLeft = hardwareMap.dcMotor.get("bl");
+		backRight = hardwareMap.dcMotor.get("br");
 
 		//Assuming that the right motors spin the oppisite way
 		frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 		backRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
-		opMode.telemetry.addData("CHASSIS: ", "Initialized everything!");
+		opMode.telemetry.addData(CHASSIS_TELEMENTRY_IDENTIFIER, "Initialized everything!");
 
 		updateTelementry();
 	}
