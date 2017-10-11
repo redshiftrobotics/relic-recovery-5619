@@ -15,14 +15,14 @@ import static org.firstinspires.ftc.teamcode.utilities.RRMath.clamp;
  * Created by Eric Golde on 9/26/2017.
  */
 
-@TeleOp(name = "Mecanum Driving", group = "teleop")
+@TeleOp(name = "Mecanum Driving")
 public class MecanumDriving extends OpMode {
 
 	private Chassis chassis = new Chassis(this);
 	private DecimalFormat df = new DecimalFormat("#.##");
 
     private static final double MAX_FORWARD_BACK_SPEED = 0.7;
-    private static final double MAX_STRAFE_SPEED = 0.3;
+    private static final double MAX_STRAFE_SPEED = 1;
     private static final double MAX_ROTATION_SPEED = 0.5;
 
 	@Override
