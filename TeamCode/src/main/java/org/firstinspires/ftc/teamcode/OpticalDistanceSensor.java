@@ -1,12 +1,12 @@
-package org.firstinspires.ftc.teamcode.autonomous;
+package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 
-@TeleOp(name = "Sensor: MR ODS", group = "Sensor")
-@Disabled
+@Autonomous(name = "Sensor: MR ODS", group = "Sensor")
 
 public class OpticalDistanceSensor extends LinearOpMode {
     com.qualcomm.robotcore.hardware.OpticalDistanceSensor odsSensor;  // Hardware Device Object
@@ -25,9 +25,8 @@ public class OpticalDistanceSensor extends LinearOpMode {
         while (opModeIsActive()) {
 
             // send the info back to driver station using telemetry function.
-            telemetry.addData("Raw",    odsSensor.getRawLightDetected());
-            telemetry.addData("Normal", odsSensor.getLightDetected());
-
+            telemetry.addData("Normal", odsSensor.getLightDetected() * 10000 > 6322);
+            telemetry.addData("> ", odsSensor.getLightDetected() * 10000);
             telemetry.update();
         }
     }
