@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.utilities.Chassis;
  * Created by zoe on 10/14/17.
  */
 
-@Autonomous(name = "Concept: I2c Address Change", group = "Pixy")
+@Autonomous(name = "Full Test: FL, RL, FR, BR", group = "Pixy")
 public class turning_test extends LinearOpMode {
 
     @Override
