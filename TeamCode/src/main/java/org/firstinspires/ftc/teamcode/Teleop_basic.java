@@ -64,10 +64,10 @@ public class Teleop_basic extends LinearOpMode {
             // rightPower = -gamepad1.right_stick_y ;
 
             // Send calculated power to wheels
-            leftDrive.setPower(leftPower/10);
-            rightDrive.setPower(rightPower/10);
-            leftDrive_b.setPower(leftPower/10);
-            rightDrive_b.setPower(rightPower/10);
+            leftDrive.setPower(leftPower/3);
+            rightDrive.setPower(rightPower/3);
+            leftDrive_b.setPower(leftPower/3);
+            rightDrive_b.setPower(rightPower/3);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());

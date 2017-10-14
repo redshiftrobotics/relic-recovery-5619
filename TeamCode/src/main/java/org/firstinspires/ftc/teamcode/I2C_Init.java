@@ -46,7 +46,7 @@ import java.util.concurrent.locks.Lock;
 /**
  * An example of a linear op mode that shows how to change the I2C address.
  */
-@Autonomous(name = "Concept: I2c Address Change", group = "Pixy")
+@Autonomous(name = "Pixy BOI", group = "Pixy")
 public class I2C_Init extends LinearOpMode {
 
     PixyCam myPixyCam = new PixyCam();
@@ -67,16 +67,16 @@ public class I2C_Init extends LinearOpMode {
 
             if (myPixyCam.GetXCenter() > 0){
                 if (myPixyCam.GetXCenter() > 160){
-                    chassis.frontLeft.setPower(0.26f);
-                    chassis.backLeft.setPower(0.6f);
-                    chassis.frontRight.setPower(0.3f);
-                    chassis.backRight.setPower(0.3f);
+                    chassis.frontLeft.setPower(0.5f);
+                    chassis.backLeft.setPower(0.5f);
+                    chassis.frontRight.setPower(0f);
+                    chassis.backRight.setPower(0f);
                     telemetry.addData("M: ", "should be more on left");
                 }else{
-                    chassis.frontLeft.setPower(0.3f);
-                    chassis.backLeft.setPower(0.3f);
-                    chassis.frontRight.setPower(0.6f);
-                    chassis.backRight.setPower(0.6f);
+                    chassis.frontLeft.setPower(0f);
+                    chassis.backLeft.setPower(0f);
+                    chassis.frontRight.setPower(0.5f);
+                    chassis.backRight.setPower(0.5f);
                     telemetry.addData("M: ", "should be more on right");
                 }
             }else{
