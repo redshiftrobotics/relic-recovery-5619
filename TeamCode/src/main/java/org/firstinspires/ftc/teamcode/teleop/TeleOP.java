@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -9,14 +8,12 @@ import org.firstinspires.ftc.teamcode.utilities.RRMath;
 
 import java.text.DecimalFormat;
 
-import static org.firstinspires.ftc.teamcode.utilities.RRMath.clamp;
-
 /**
  * Created by Eric Golde on 9/26/2017.
  */
 
-@TeleOp(name = "Mecanum Driving")
-public class MecanumDriving extends OpMode {
+@TeleOp(name = "TeleOP")
+public class TeleOP extends OpMode {
 
 	private Chassis chassis = new Chassis(this);
 	private DecimalFormat df = new DecimalFormat("#.##");
@@ -32,7 +29,7 @@ public class MecanumDriving extends OpMode {
 
 	@Override
 	public void loop(){
-		chassis.loop();
+		//Driving
         //                       - to switch forward and back                  reverse to change strafing                reverse to change rotation
 		double fl = RRMath.clamp(gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED + gamepad1.left_stick_x * MAX_STRAFE_SPEED - gamepad1.right_stick_x * MAX_ROTATION_SPEED);
         double fr = RRMath.clamp(gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED - gamepad1.left_stick_x * MAX_STRAFE_SPEED + gamepad1.right_stick_x * MAX_ROTATION_SPEED);
@@ -48,6 +45,30 @@ public class MecanumDriving extends OpMode {
 		telemetry.addData("FR: ", df.format(fr));
 		telemetry.addData("BL: ", df.format(bl));
 		telemetry.addData("BR: ", df.format(br));
+
+		//Clamps
+		if(toggleGlyphServos()){
+			chassis.glyphLeft.setPosition(.50);
+			chassis.glyphLeft.setPosition(.50);
+		}
+		else{
+			chassis.glyphLeft.setPosition(0);
+			chassis.glyphLeft.setPosition(0);
+		}
+
+
+		chassis.loop();
+	}
+
+	private boolean lastBttnStateGlyphServo = false;
+	private boolean toggleStateGlyphServo = false;
+
+	public boolean toggleGlyphServos() {
+		if (gamepad2.a && !lastBttnStateGlyphServo) {
+			toggleStateGlyphServo = !toggleStateGlyphServo;
+		}
+		lastBttnStateGlyphServo = gamepad2.a;
+		return toggleStateGlyphServo;
 	}
 
 }

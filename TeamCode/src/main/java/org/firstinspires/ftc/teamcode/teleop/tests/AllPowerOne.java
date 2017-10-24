@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.teamcode.utilities.Chassis;
  */
 
 @TeleOp(name="AllForward", group = "testing")
+@Disabled
 public class AllPowerOne extends OpMode {
 
     Chassis chassis = new Chassis(this);
