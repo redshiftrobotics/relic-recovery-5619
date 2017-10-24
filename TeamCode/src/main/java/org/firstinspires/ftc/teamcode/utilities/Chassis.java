@@ -16,10 +16,11 @@ import com.qualcomm.robotcore.hardware.*;
 	  - Back Right: br
 	  - Front Left: fl
 	  - Front Right: fr
+	  - Glyph Motor: glym
 
 	Servos:
-	  - Glyph Left: gl
-	  - Glyph Right: gr
+	  - Glyph Left: glyl
+	  - Glyph Right: glyr
 
 	Sensors:
 	  - PixyCam: pixy
@@ -36,6 +37,7 @@ public class Chassis {
 	public DcMotor frontRight;
 	public DcMotor backLeft;
 	public DcMotor backRight;
+	public DcMotor glyphMotor;
 
 	//Servos
 	public Servo glyphLeft;
@@ -67,14 +69,15 @@ public class Chassis {
 		frontRight = hardwareMap.dcMotor.get("fr");
 		backLeft = hardwareMap.dcMotor.get("bl");
 		backRight = hardwareMap.dcMotor.get("br");
+		glyphMotor = hardwareMap.dcMotor.get("glym");
 
 		//Assuming that the right motors spin the oppisite way
 		frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 		backRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
 		//Servos
-		glyphLeft = hardwareMap.servo.get("gl");
-		glyphRight = hardwareMap.servo.get("gr");
+		glyphLeft = hardwareMap.servo.get("glyl");
+		glyphRight = hardwareMap.servo.get("glyr");
 		glyphRight.setDirection(Servo.Direction.REVERSE);
 
 		//Sensors

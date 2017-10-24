@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.utilities.Chassis;
 import org.firstinspires.ftc.teamcode.utilities.RRMath;
@@ -22,6 +23,15 @@ public class TeleOP extends OpMode {
     private static final double MAX_STRAFE_SPEED = 1;
     private static final double MAX_ROTATION_SPEED = 0.5;
 
+	//Glyph Clamps
+	private static final double GLYPH_LEFT_OPEN = .50;
+	private static final double GLYPH_RIGHT_OPEN = .50;
+	private static final double GLYPH_LEFT_CLOSE = 0;
+	private static final double GLYPH_RIGHT_CLOSE = 0;
+
+	//GLYPH Motor
+	private static final double GLYPH_MOTOR_SPEED = 1;
+
 	@Override
 	public void init(){
 		chassis.init();
@@ -40,6 +50,7 @@ public class TeleOP extends OpMode {
 		chassis.frontRight.setPower(fr);
 		chassis.backLeft.setPower(bl);
 		chassis.backRight.setPower(br);
+		chassis.glyphMotor.setPower(Range.clip(gamepad2.right_stick_y, -GLYPH_MOTOR_SPEED, GLYPH_MOTOR_SPEED));
 
 		telemetry.addData("FL: ", df.format(fl));
 		telemetry.addData("FR: ", df.format(fr));
@@ -48,12 +59,12 @@ public class TeleOP extends OpMode {
 
 		//Clamps
 		if(toggleGlyphServos()){
-			chassis.glyphLeft.setPosition(.50);
-			chassis.glyphLeft.setPosition(.50);
+			chassis.glyphLeft.setPosition(GLYPH_LEFT_OPEN);
+			chassis.glyphLeft.setPosition(GLYPH_RIGHT_OPEN);
 		}
 		else{
-			chassis.glyphLeft.setPosition(0);
-			chassis.glyphLeft.setPosition(0);
+			chassis.glyphLeft.setPosition(GLYPH_LEFT_CLOSE);
+			chassis.glyphLeft.setPosition(GLYPH_RIGHT_CLOSE);
 		}
 
 
