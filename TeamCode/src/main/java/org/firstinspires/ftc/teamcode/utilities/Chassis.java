@@ -40,7 +40,7 @@ public class Chassis {
 		backLeft = hardware.dcMotor.get("bl");
 		backRight = hardware.dcMotor.get("br");
 
-		//Assuming that the right motors spin the oppisite way
+		//Assuming that the right motors spin the opposite way
 		frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 		backRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
