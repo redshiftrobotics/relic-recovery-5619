@@ -9,22 +9,49 @@ import com.qualcomm.robotcore.hardware.*;
  * Created by Eric Golde on 9/12/2017.
  */
 
+/*
+	Note on how to config
+	Motors:
+	  - Back Left: bl
+	  - Back Right: br
+	  - Front Left: fl
+	  - Front Right: fr
+	  - Glyph Motor: glym
+
+	Servos:
+	  - Glyph Left: glyl
+	  - Glyph Right: glyr
+
+	Sensors:
+	  - PixyCam: pixy
+	  - Optical Distance: distance
+ */
 public class Chassis {
 
 	private OpMode opMode;
-	private HardwareMap hardware;
+	private HardwareMap hardwareMap;
+	private static final String CHASSIS_TELEMENTRY_IDENTIFIER = "CHASSIS: ";
 
 	//Motors
 	public DcMotor frontLeft;
 	public DcMotor frontRight;
 	public DcMotor backLeft;
 	public DcMotor backRight;
+	public DcMotor glyphMotor;
+
+	//Servos
+	public Servo glyphLeft;
+	public Servo glyphRight;
+
+	//Sensors
+	public PixyCam pixyCam = new PixyCam();;
+	//OpticalDistanceSensor distanceSensor;
 
 
 
 	public Chassis(OpMode opMode){
 		this.opMode = opMode;
-		this.hardware = opMode.hardwareMap;
+
 	}
 	/**
 	 * ! CALL AT THE BEGINNING OF INIT() !
@@ -32,29 +59,42 @@ public class Chassis {
 	 */
 	public void init(){
 		//Here is where everything gets initialised
-		opMode.telemetry.addData("CHASSIS: ", "Starting to Initialize everything...");
+		opMode.telemetry.addData(CHASSIS_TELEMENTRY_IDENTIFIER, "Starting to Initialize everything...");
 		updateTelementry();
 
-		frontLeft = hardware.dcMotor.get("fl");
-		frontRight = hardware.dcMotor.get("fr");
-		backLeft = hardware.dcMotor.get("bl");
-		backRight = hardware.dcMotor.get("br");
+		hardwareMap = opMode.hardwareMap;
+
+		//Motors
+		frontLeft = hardwareMap.dcMotor.get("fl");
+		frontRight = hardwareMap.dcMotor.get("fr");
+		backLeft = hardwareMap.dcMotor.get("bl");
+		backRight = hardwareMap.dcMotor.get("br");
+		glyphMotor = hardwareMap.dcMotor.get("glym");
 
 		//Assuming that the right motors spin the opposite way
 		frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 		backRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
-		opMode.telemetry.addData("CHASSIS: ", "Initialized everything!");
+		//Servos
+		glyphLeft = hardwareMap.servo.get("glyl");
+		glyphRight = hardwareMap.servo.get("glyr");
+		glyphRight.setDirection(Servo.Direction.REVERSE);
 
+		//Sensors
+		pixyCam.initialize(hardwareMap.get(com.qualcomm.robotcore.hardware.I2cDeviceSynch.class, "pixy"));
+		//distanceSensor = hardwareMap.opticalDistanceSensor.get("distance");
+
+		//Call at the end
+		opMode.telemetry.addData(CHASSIS_TELEMENTRY_IDENTIFIER, "Initialized everything!");
 		updateTelementry();
 	}
 
 	/**
-	 * ! CALL AT THE BEGINNING OF LOOP() !
+	 * ! CALL AT THE END OF LOOP() !
 	 * This will automatically update telemetry
 	 */
 	public void loop(){
-		//We might need this, not clear as of now
+		pixyCam.update();
 		updateTelementry();
 	}
 
