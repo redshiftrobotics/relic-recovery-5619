@@ -67,6 +67,7 @@ public class TeleOP extends OpMode {
 			chassis.glyphLeft.setPosition(GLYPH_RIGHT_CLOSE);
 		}
 
+		telemetry.addData("Servos: ", toggleStateGlyphServo);
 
 		chassis.loop();
 	}
