@@ -44,7 +44,7 @@ public class Chassis {
 	public Servo glyphRight;
 
 	//Sensors
-	public PixyCam pixyCam = new PixyCam();;
+	//public PixyCam pixyCam = new PixyCam();;
 	//OpticalDistanceSensor distanceSensor;
 
 
@@ -81,7 +81,7 @@ public class Chassis {
 		glyphRight.setDirection(Servo.Direction.REVERSE);
 
 		//Sensors
-		pixyCam.initialize(hardwareMap.get(com.qualcomm.robotcore.hardware.I2cDeviceSynch.class, "pixy"));
+		//pixyCam.initialize(hardwareMap.get(com.qualcomm.robotcore.hardware.I2cDeviceSynch.class, "pixy"));
 		//distanceSensor = hardwareMap.opticalDistanceSensor.get("distance");
 
 		//Call at the end
@@ -94,7 +94,7 @@ public class Chassis {
 	 * This will automatically update telemetry
 	 */
 	public void loop(){
-		pixyCam.update();
+		//pixyCam.update();
 		updateTelementry();
 	}
 
