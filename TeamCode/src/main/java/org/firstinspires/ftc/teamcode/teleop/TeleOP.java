@@ -52,7 +52,7 @@ public class TeleOP extends OpMode {
 		chassis.frontRight.setPower(fr);
 		chassis.backLeft.setPower(bl);
 		chassis.backRight.setPower(br);
-		//chassis.glyphMotor.setPower(Range.clip(gamepad2.right_stick_y, -GLYPH_MOTOR_SPEED, GLYPH_MOTOR_SPEED));
+		chassis.glyphMotor.setPower(Range.clip(gamepad2.right_stick_y, -GLYPH_MOTOR_SPEED, GLYPH_MOTOR_SPEED));
 
 		telemetry.addData("FL: ", df.format(fl));
 		telemetry.addData("FR: ", df.format(fr));
@@ -60,7 +60,7 @@ public class TeleOP extends OpMode {
 		telemetry.addData("BR: ", df.format(br));
 
 		//Clamps
-		/*if(toggleGlyphServos()){
+		if(toggleGlyphServos()){
 			chassis.glyphLeft.setPosition(GLYPH_LEFT_OPEN);
 			chassis.glyphLeft.setPosition(GLYPH_RIGHT_OPEN);
 		}
@@ -69,7 +69,7 @@ public class TeleOP extends OpMode {
 			chassis.glyphLeft.setPosition(GLYPH_RIGHT_CLOSE);
 		}
 
-		telemetry.addData("Servos: ", toggleStateGlyphServo);*/
+		telemetry.addData("Servos: ", toggleStateGlyphServo);
 
 		chassis.loop();
 	}

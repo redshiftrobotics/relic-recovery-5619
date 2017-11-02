@@ -37,11 +37,11 @@ public class Chassis {
 	public DcMotor frontRight;
 	public DcMotor backLeft;
 	public DcMotor backRight;
-	//public DcMotor glyphMotor;
+	public DcMotor glyphMotor;
 
 	//Servos
-	/*public Servo glyphLeft;
-	public Servo glyphRight;*/
+	public Servo glyphLeft;
+	public Servo glyphRight;
 
 	//Sensors
 	//public PixyCam pixyCam = new PixyCam();;
@@ -69,16 +69,16 @@ public class Chassis {
 		frontRight = hardwareMap.dcMotor.get("fr");
 		backLeft = hardwareMap.dcMotor.get("bl");
 		backRight = hardwareMap.dcMotor.get("br");
-		//glyphMotor = hardwareMap.dcMotor.get("glym");
+		glyphMotor = hardwareMap.dcMotor.get("glym");
 
 		//Assuming that the right motors spin the opposite way
 		frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 		backRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
 		//Servos
-		/*glyphLeft = hardwareMap.servo.get("glyl");
+		glyphLeft = hardwareMap.servo.get("glyl");
 		glyphRight = hardwareMap.servo.get("glyr");
-		glyphRight.setDirection(Servo.Direction.REVERSE);*/
+		glyphRight.setDirection(Servo.Direction.REVERSE);
 
 		//Sensors
 		//pixyCam.initialize(hardwareMap.get(com.qualcomm.robotcore.hardware.I2cDeviceSynch.class, "pixy"));
