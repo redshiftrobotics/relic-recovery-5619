@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.teleop;
+package org.firstinspires.ftc.teamcode.teleop.tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -16,6 +16,7 @@ import static org.firstinspires.ftc.teamcode.utilities.RRMath.clamp;
  */
 
 @TeleOp(name = "Mecanum Driving")
+@Disabled
 public class MecanumDriving extends OpMode {
 
 	private Chassis chassis = new Chassis(this);
@@ -32,7 +33,6 @@ public class MecanumDriving extends OpMode {
 
 	@Override
 	public void loop(){
-		chassis.loop();
         //                       - to switch forward and back                  reverse to change strafing                reverse to change rotation
 		double fl = RRMath.clamp(gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED + gamepad1.left_stick_x * MAX_STRAFE_SPEED - gamepad1.right_stick_x * MAX_ROTATION_SPEED);
         double fr = RRMath.clamp(gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED - gamepad1.left_stick_x * MAX_STRAFE_SPEED + gamepad1.right_stick_x * MAX_ROTATION_SPEED);
@@ -48,6 +48,8 @@ public class MecanumDriving extends OpMode {
 		telemetry.addData("FR: ", df.format(fr));
 		telemetry.addData("BL: ", df.format(bl));
 		telemetry.addData("BR: ", df.format(br));
+
+		chassis.loop();
 	}
 
 }

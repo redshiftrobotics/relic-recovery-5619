@@ -1,5 +1,6 @@
-package org.firstinspires.ftc.teamcode.teleop;
+package org.firstinspires.ftc.teamcode.teleop.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
@@ -11,6 +12,7 @@ import org.firstinspires.ftc.teamcode.utilities.Chassis;
  */
 
 @TeleOp(name="Tank Drive")
+@Disabled
 public class TankDrive extends OpMode {
 
     private Chassis chassis = new Chassis(this);
@@ -21,7 +23,6 @@ public class TankDrive extends OpMode {
     }
 
     public void loop(){
-        chassis.loop();
         float xValue = -gamepad1.left_stick_y;
         float yValue = -gamepad1.right_stick_y;
         xValue = Range.clip(xValue, -1, 1);
@@ -30,6 +31,7 @@ public class TankDrive extends OpMode {
         chassis.backLeft.setPower(xValue * POWER_MODIFIER);
         chassis.frontRight.setPower(yValue * POWER_MODIFIER);
         chassis.backRight.setPower(yValue * POWER_MODIFIER);
+        chassis.loop();
     }
 
 }
