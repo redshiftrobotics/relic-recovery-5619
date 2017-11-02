@@ -16,6 +16,7 @@ import static org.firstinspires.ftc.teamcode.utilities.RRMath.clamp;
  */
 
 @TeleOp(name = "Mecanum Driving")
+@Disabled
 public class MecanumDriving extends OpMode {
 
 	private Chassis chassis = new Chassis(this);

@@ -9,6 +9,8 @@ import org.firstinspires.ftc.teamcode.utilities.RRMath;
 
 import java.text.DecimalFormat;
 
+import static android.R.attr.x;
+
 /**
  * Created by Eric Golde on 9/26/2017.
  */
@@ -41,16 +43,16 @@ public class TeleOP extends OpMode {
 	public void loop(){
 		//Driving
         //                       - to switch forward and back                  reverse to change strafing                reverse to change rotation
-		double fl = RRMath.clamp(gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED + gamepad1.left_stick_x * MAX_STRAFE_SPEED - gamepad1.right_stick_x * MAX_ROTATION_SPEED);
-        double fr = RRMath.clamp(gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED - gamepad1.left_stick_x * MAX_STRAFE_SPEED + gamepad1.right_stick_x * MAX_ROTATION_SPEED);
-        double bl = RRMath.clamp(gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED - gamepad1.left_stick_x * MAX_STRAFE_SPEED - gamepad1.right_stick_x * MAX_ROTATION_SPEED);
-        double br = RRMath.clamp(gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED + gamepad1.left_stick_x * MAX_STRAFE_SPEED + gamepad1.right_stick_x * MAX_ROTATION_SPEED);
+		double fl = RRMath.clamp(-gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED + gamepad1.left_stick_x * MAX_STRAFE_SPEED - gamepad1.right_stick_x * MAX_ROTATION_SPEED);
+        double fr = RRMath.clamp(-gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED - gamepad1.left_stick_x * MAX_STRAFE_SPEED + gamepad1.right_stick_x * MAX_ROTATION_SPEED);
+        double bl = RRMath.clamp(-gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED - gamepad1.left_stick_x * MAX_STRAFE_SPEED - gamepad1.right_stick_x * MAX_ROTATION_SPEED);
+        double br = RRMath.clamp(-gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED + gamepad1.left_stick_x * MAX_STRAFE_SPEED + gamepad1.right_stick_x * MAX_ROTATION_SPEED);
 
 		chassis.frontLeft.setPower(fl);
 		chassis.frontRight.setPower(fr);
 		chassis.backLeft.setPower(bl);
 		chassis.backRight.setPower(br);
-		chassis.glyphMotor.setPower(Range.clip(gamepad2.right_stick_y, -GLYPH_MOTOR_SPEED, GLYPH_MOTOR_SPEED));
+		//chassis.glyphMotor.setPower(Range.clip(gamepad2.right_stick_y, -GLYPH_MOTOR_SPEED, GLYPH_MOTOR_SPEED));
 
 		telemetry.addData("FL: ", df.format(fl));
 		telemetry.addData("FR: ", df.format(fr));
@@ -58,7 +60,7 @@ public class TeleOP extends OpMode {
 		telemetry.addData("BR: ", df.format(br));
 
 		//Clamps
-		if(toggleGlyphServos()){
+		/*if(toggleGlyphServos()){
 			chassis.glyphLeft.setPosition(GLYPH_LEFT_OPEN);
 			chassis.glyphLeft.setPosition(GLYPH_RIGHT_OPEN);
 		}
@@ -67,7 +69,7 @@ public class TeleOP extends OpMode {
 			chassis.glyphLeft.setPosition(GLYPH_RIGHT_CLOSE);
 		}
 
-		telemetry.addData("Servos: ", toggleStateGlyphServo);
+		telemetry.addData("Servos: ", toggleStateGlyphServo);*/
 
 		chassis.loop();
 	}
