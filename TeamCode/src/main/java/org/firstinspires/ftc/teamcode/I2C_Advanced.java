@@ -29,33 +29,39 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.modernrobotics.ModernRoboticsUsbDeviceInterfaceModule;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
-import com.qualcomm.robotcore.hardware.I2cAddr;
-import com.qualcomm.robotcore.util.RobotLog;
-import com.qualcomm.robotcore.util.TypeConversion;
-import org.firstinspires.ftc.teamcode.PixyCam;
-import org.firstinspires.ftc.teamcode.utilities.Chassis;
 
-import java.util.concurrent.locks.Lock;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.utilities.Chassis;
+import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * An example of a linear op mode that shows how to change the I2C address.
  */
-@Autonomous(name = "Pixy BOI", group = "Pixy")
-public class I2C_Init extends LinearOpMode {
+@Autonomous(name = "Pixy BOI (Advanced)", group = "Pixy")
+public class I2C_Advanced extends LinearOpMode {
+    static final double POS     =  1.0;     // Maximum rotational position
+
+    Servo   servo_l;
+    Servo   servo_r;
+    double  position = POS / 2; // Start at halfway position
 
     PixyCam myPixyCam = new PixyCam();
+    com.qualcomm.robotcore.hardware.OpticalDistanceSensor odsSensor;  // Hardware Device Object
+
+    boolean grabbed = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
         Chassis chassis = new Chassis(this);
 
         myPixyCam.initialize(hardwareMap.get(com.qualcomm.robotcore.hardware.I2cDeviceSynch.class, "pixy_sensor"));
+        odsSensor = hardwareMap.get(com.qualcomm.robotcore.hardware.OpticalDistanceSensor.class, "sensor_ods");
+
+        servo_l = hardwareMap.get(Servo.class, "left_hand");
+        servo_r = hardwareMap.get(Servo.class, "right_hand");
 
         chassis.init();
 
@@ -65,19 +71,32 @@ public class I2C_Init extends LinearOpMode {
         while(opModeIsActive()) {
             chassis.loop();
 
+            telemetry.addData("Normal", odsSensor.getLightDetected() * 1000 > 300);
+            telemetry.addData("> ", odsSensor.getLightDetected() * 1000);
+            telemetry.update();
+
             if (myPixyCam.GetXCenter() > 0){
-                if (myPixyCam.GetXCenter() > 160){
-                    chassis.frontLeft.setPower(-0.5f);
-                    chassis.backLeft.setPower(-0.5f);
-                    chassis.frontRight.setPower(0f);
-                    chassis.backRight.setPower(0f);
-                    telemetry.addData("M: ", "should be more on left");
-                }else{
-                    chassis.frontLeft.setPower(0f);
-                    chassis.backLeft.setPower(0f);
-                    chassis.frontRight.setPower(-0.5f);
-                    chassis.backRight.setPower(-0.5f);
-                    telemetry.addData("M: ", "should be more on right");
+                if (odsSensor.getLightDetected() * 1000 > 300) {
+                    grabbed = true;
+                }else {
+                    if (!grabbed){
+                        if (myPixyCam.GetXCenter() > 160){
+                            chassis.frontLeft.setPower(-0.5f);
+                            chassis.backLeft.setPower(-0.5f);
+                            chassis.frontRight.setPower(0f);
+                            chassis.backRight.setPower(0f);
+                            telemetry.addData("M: ", "should be more on left");
+                        }else{
+                            chassis.frontLeft.setPower(0f);
+                            chassis.backLeft.setPower(0f);
+                            chassis.frontRight.setPower(-0.5f);
+                            chassis.backRight.setPower(-0.5f);
+                            telemetry.addData("M: ", "should be more on right");
+                        }
+                    } else {
+                        //reset with imu
+                        //go to 61 15
+                    }
                 }
             }else{
                 chassis.frontLeft.setPower(0.0f);

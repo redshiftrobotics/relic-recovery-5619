@@ -18,6 +18,7 @@ public class Teleop_basic extends LinearOpMode {
     private DcMotor rightDrive = null;
     private DcMotor leftDrive_b = null;
     private DcMotor rightDrive_b = null;
+    private int broken = -1;
 
     @Override
     public void runOpMode() {
@@ -27,10 +28,10 @@ public class Teleop_basic extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
-        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
-        leftDrive_b  = hardwareMap.get(DcMotor.class, "left_back");
-        rightDrive_b = hardwareMap.get(DcMotor.class, "right_back");
+        leftDrive  = hardwareMap.get(DcMotor.class, "br");
+        rightDrive = hardwareMap.get(DcMotor.class, "fr");
+        leftDrive_b  = hardwareMap.get(DcMotor.class, "bl");
+        rightDrive_b = hardwareMap.get(DcMotor.class, "fl");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -64,10 +65,10 @@ public class Teleop_basic extends LinearOpMode {
             // rightPower = -gamepad1.right_stick_y ;
 
             // Send calculated power to wheels
-            leftDrive.setPower(leftPower/3);
-            rightDrive.setPower(rightPower/3);
-            leftDrive_b.setPower(leftPower/3);
-            rightDrive_b.setPower(rightPower/3);
+            leftDrive.setPower(leftPower/1.5);
+            rightDrive.setPower(rightPower/1.5);
+            leftDrive_b.setPower(leftPower/1.5);
+            rightDrive_b.setPower((rightPower/1.5)* broken);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
