@@ -78,7 +78,6 @@ public class Chassis {
 		//Servos
 		glyphLeft = hardwareMap.servo.get("glyl");
 		glyphRight = hardwareMap.servo.get("glyr");
-		glyphRight.setDirection(Servo.Direction.REVERSE);
 
 		//Sensors
 		//pixyCam.initialize(hardwareMap.get(com.qualcomm.robotcore.hardware.I2cDeviceSynch.class, "pixy"));
