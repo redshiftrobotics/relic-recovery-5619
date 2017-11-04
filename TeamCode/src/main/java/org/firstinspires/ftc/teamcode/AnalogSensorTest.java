@@ -55,6 +55,7 @@ import java.util.Arrays;
  */
 
 @TeleOp(name="Analog Sensor", group="Iterative Opmode")
+@Disabled
 public class AnalogSensorTest extends OpMode {
 
     AnalogInput ultrasonic;

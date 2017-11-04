@@ -1,5 +1,6 @@
 package org.redshiftrobotics.lib.descartes;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
@@ -33,6 +34,7 @@ class Timer {
 }
 
 @I2cSensor(name = "Maxbotix Ultrasonic Sensor", description = "A Maxbotix Ultrasonic Sensor", xmlTag = "MAXBOTICS_ULTRASONIC")
+@Disabled
 public class UltrasonicDistanceSensor extends I2cDeviceSynchDevice<I2cDeviceSynch> implements DistanceSensor {
 
     private Timer timer;

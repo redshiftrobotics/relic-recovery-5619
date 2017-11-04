@@ -31,6 +31,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
@@ -41,6 +42,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * An example of a linear op mode that shows how to change the I2C address.
  */
 @Autonomous(name = "Pixy BOI (Advanced)", group = "Pixy")
+@Disabled
 public class I2C_Advanced extends LinearOpMode {
     static final double POS     =  1.0;     // Maximum rotational position
 

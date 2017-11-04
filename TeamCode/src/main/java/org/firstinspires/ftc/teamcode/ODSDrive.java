@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.utilities.Chassis;
@@ -8,6 +9,7 @@ import org.firstinspires.ftc.teamcode.utilities.Chassis;
 import java.text.DecimalFormat;
 
 @Autonomous(name = "Drive ODS", group = "Sensor")
+@Disabled
 public class ODSDrive extends LinearOpMode {
     com.qualcomm.robotcore.hardware.OpticalDistanceSensor odsSensor;  // Hardware Device Object
 

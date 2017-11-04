@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 
 @Autonomous(name = "Sensor: MR ODS", group = "Sensor")
-
+@Disabled
 public class OpticalDistanceSensor extends LinearOpMode {
     com.qualcomm.robotcore.hardware.OpticalDistanceSensor odsSensor;  // Hardware Device Object
 

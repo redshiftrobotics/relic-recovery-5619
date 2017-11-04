@@ -55,6 +55,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @TeleOp(name="Whisker test", group="Iterative Opmode")
+@Disabled
 public class DigitalSensorTest extends OpMode
 {
     DigitalChannel whisker;

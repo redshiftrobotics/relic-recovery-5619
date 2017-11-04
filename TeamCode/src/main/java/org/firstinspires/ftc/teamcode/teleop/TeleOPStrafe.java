@@ -15,8 +15,8 @@ import static android.R.attr.x;
  * Created by Eric Golde on 9/26/2017.
  */
 
-@TeleOp(name = "TeleOP")
-public class TeleOP extends OpMode {
+@TeleOp(name = "Strafe", group="teleop" )
+public class TeleOPStrafe extends OpMode {
 
 	private Chassis chassis = new Chassis(this);
 	private DecimalFormat df = new DecimalFormat("#.##");
@@ -33,8 +33,8 @@ public class TeleOP extends OpMode {
 	private static final double GLYPH_RIGHT_CLOSE = .50;
 
 	//GLYPH Motor REVERSED
-	private static final double GLYPH_MOTOR_SPEED_UP =0.1;
-	private static final double GLYPH_MOTOR_SPEED_DOWN = -1;
+	private static final double GLYPH_MOTOR_SPEED_UP =0.3;
+	private static final double GLYPH_MOTOR_SPEED_DOWN = -0.7;
 	@Override
 	public void init(){
 		chassis.init();

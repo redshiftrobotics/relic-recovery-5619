@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -8,6 +9,7 @@ import org.firstinspires.ftc.teamcode.utilities.Chassis;
 import java.text.DecimalFormat;
 
 @TeleOp(name = "MTD", group = "testing")
+@Disabled
 public class MecanumDrivingTest extends OpMode {
 	double rotation = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
 	double robotAngle = Math.atan2(gamepad1.left_stick_x, gamepad1.left_stick_y);

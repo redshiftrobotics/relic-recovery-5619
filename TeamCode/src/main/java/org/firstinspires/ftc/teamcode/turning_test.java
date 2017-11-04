@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.utilities.Chassis;
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.teamcode.utilities.Chassis;
  */
 
 @Autonomous(name = "Full Test: FL, RL, FR, BR", group = "Pixy")
+@Disabled
 public class turning_test extends LinearOpMode {
 
     @Override

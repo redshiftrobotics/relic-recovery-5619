@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.Func;
@@ -19,6 +20,7 @@ import java.util.Locale;
  */
 
 @Autonomous(name = "Ultra Test", group = "Sensor")
+@Disabled
 public class IC2_Ultra extends LinearOpMode  {
 
     UltrasonicI2cRangeSensor ultra;
