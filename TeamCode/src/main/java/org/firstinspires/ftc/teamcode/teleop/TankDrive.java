@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
@@ -14,6 +15,7 @@ import static android.R.attr.right;
  */
 
 @TeleOp(name = "Tank", group="teleop" )
+@Disabled
 public class TankDrive extends OpMode {
 
     Chassis chassis = new Chassis(this);

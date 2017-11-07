@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
@@ -16,6 +17,7 @@ import static android.R.attr.x;
  */
 
 @TeleOp(name = "Strafe", group="teleop" )
+@Disabled
 public class TeleOPStrafe extends OpMode {
 
 	private Chassis chassis = new Chassis(this);
