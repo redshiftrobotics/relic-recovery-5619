@@ -27,9 +27,9 @@ public class TeleOP extends OpMode {
 
 	//Glyph Clamps
 	private static final double GLYPH_LEFT_OPEN = .50;
-	private static final double GLYPH_RIGHT_OPEN = 0.9;
+	private static final double GLYPH_RIGHT_OPEN = .50;
 	private static final double GLYPH_LEFT_CLOSE = 0;
-	private static final double GLYPH_RIGHT_CLOSE = .05;
+	private static final double GLYPH_RIGHT_CLOSE = 0;
 
 	//GLYPH Motor
 	private static final double GLYPH_MOTOR_SPEED = 1;
@@ -43,22 +43,10 @@ public class TeleOP extends OpMode {
 	public void loop(){
 		//Driving
         //                       - to switch forward and back                  reverse to change strafing                reverse to change rotation
-		double fl = RRMath.clamp(-gamepad1.left_stick_y
-				* MAX_FORWARD_BACK_SPEED + gamepad1.left_stick_x
-				* MAX_STRAFE_SPEED - gamepad1.right_stick_x
-				* MAX_ROTATION_SPEED);
-        double fr = RRMath.clamp(-gamepad1.left_stick_y
-				* MAX_FORWARD_BACK_SPEED - gamepad1.left_stick_x
-				* MAX_STRAFE_SPEED + gamepad1.right_stick_x
-				* MAX_ROTATION_SPEED);
-        double bl = RRMath.clamp(-gamepad1.left_stick_y
-				* MAX_FORWARD_BACK_SPEED - gamepad1.left_stick_x
-				* MAX_STRAFE_SPEED - gamepad1.right_stick_x
-				* MAX_ROTATION_SPEED);
-        double br = RRMath.clamp(-gamepad1.left_stick_y
-				* MAX_FORWARD_BACK_SPEED + gamepad1.left_stick_x
-				* MAX_STRAFE_SPEED + gamepad1.right_stick_x
-				* MAX_ROTATION_SPEED);
+		double fl = RRMath.clamp(-gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED + gamepad1.left_stick_x * MAX_STRAFE_SPEED - gamepad1.right_stick_x * MAX_ROTATION_SPEED);
+        double fr = RRMath.clamp(-gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED - gamepad1.left_stick_x * MAX_STRAFE_SPEED + gamepad1.right_stick_x * MAX_ROTATION_SPEED);
+        double bl = RRMath.clamp(-gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED - gamepad1.left_stick_x * MAX_STRAFE_SPEED - gamepad1.right_stick_x * MAX_ROTATION_SPEED);
+        double br = RRMath.clamp(-gamepad1.left_stick_y * MAX_FORWARD_BACK_SPEED + gamepad1.left_stick_x * MAX_STRAFE_SPEED + gamepad1.right_stick_x * MAX_ROTATION_SPEED);
 
 		chassis.frontLeft.setPower(fl);
 		chassis.frontRight.setPower(fr);
@@ -74,11 +62,11 @@ public class TeleOP extends OpMode {
 		//Clamps
 		if(toggleGlyphServos()){
 			chassis.glyphLeft.setPosition(GLYPH_LEFT_OPEN);
-			chassis.glyphRight.setPosition(GLYPH_RIGHT_OPEN);
+			chassis.glyphLeft.setPosition(GLYPH_RIGHT_OPEN);
 		}
 		else{
 			chassis.glyphLeft.setPosition(GLYPH_LEFT_CLOSE);
-			chassis.glyphRight.setPosition(GLYPH_RIGHT_CLOSE);
+			chassis.glyphLeft.setPosition(GLYPH_RIGHT_CLOSE);
 		}
 
 		telemetry.addData("Servos: ", toggleStateGlyphServo);
