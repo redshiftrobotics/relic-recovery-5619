@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.utilities.Chassis;
 import org.redshiftrobotics.lib.descartes.UltrasonicDistanceSensor;
@@ -53,25 +54,38 @@ public class Coordinates_2 extends OpMode {
         }
 
         telemetry.addData("X: CM", x);
+        telemetry.addData("Motor speed X", x/distanceX);
         telemetry.addData("Y: CM", y);
+        telemetry.addData("Motor speed Y", y/distanceY);
 
         //done logging
         if (x > 2 && y > 2){
             if (isBetween(inputY - 3, inputY + 3, y)){
+
+                /* Telemematry { */
+                telemetry.addData("",
+                        String.valueOf(y) +
+                                " is between " +
+                                String.valueOf(inputY-3) +
+                                " and " +
+                                String.valueOf(inputY + 3)
+                );
+                /* } Telemematry */
+
                 if(isBetween(inputX - 3, inputX + 3, x)) {
                     m.zero();
                 }else {
                     if (inputX > x) {
-                        m.strafeRight();
+                        m.strafeRight(x/distanceX);
                     } else {
-                        m.strafeLeft();
+                        m.strafeLeft(x/distanceX);
                     }
                 }
             } else {
                 if (inputY > y){
-                    m.forward();
+                    m.forward(y/distanceY);
                 } else {
-                    m.back();
+                    m.back(y/distanceY);
                 }
             }
         }else{
