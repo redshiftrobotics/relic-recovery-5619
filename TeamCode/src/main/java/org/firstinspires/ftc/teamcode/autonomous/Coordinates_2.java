@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.utilities.Chassis;
 import org.redshiftrobotics.lib.descartes.UltrasonicDistanceSensor;
+import org.firstinspires.ftc.teamcode.autonomous.Movement;
 
 /**
  * Created by zoe on 11/15/17.
@@ -24,6 +25,7 @@ public class Coordinates_2 extends OpMode {
      powerLeft,
      powerRight = 0;
     Chassis chassis = null;
+    Movement m = null;
 
     @Override
     public void init() {
@@ -32,6 +34,7 @@ public class Coordinates_2 extends OpMode {
         ultraX = hardwareMap.get(UltrasonicDistanceSensor.class, "ultra0");
         ultraY = hardwareMap.get(UltrasonicDistanceSensor.class, "ultra1");
         chassis = new Chassis(this);
+        m = new Movement(chassis);
         chassis.init();
         telemetry.addData("Finished", "init");
         telemetry.update();
@@ -54,27 +57,31 @@ public class Coordinates_2 extends OpMode {
 
         //done logging
         if (x > 2 && y > 2){
-            if (x > inputX){
-                left = 1f;
-                right = 0f;
-                telemetry.addData("M: ", "should be more on left");
-            }else if (x < inputX){
-                left = 0f;
-                right = 1f;
-                telemetry.addData("M: ", "should be more on right");
+            if (isBetween(inputY - 3, inputY + 3, y)){
+                if(isBetween(inputX - 3, inputX + 3, x)) {
+                    m.zero();
+                }else {
+                    if (inputX > x) {
+                        m.strafeRight();
+                    } else {
+                        m.strafeLeft();
+                    }
+                }
+            } else {
+                if (inputY > y){
+                    m.forward();
+                } else {
+                    m.back();
+                }
             }
-            chassis.frontLeft.setPower(powerLeft);
-            chassis.backLeft.setPower(powerLeft);
-            chassis.frontRight.setPower(powerRight);
-            chassis.backRight.setPower(powerRight);
-            telemetry.addData("Move", "Forward");
         }else{
-            chassis.frontLeft.setPower(0.0f);
-            chassis.backLeft.setPower(0.0f);
-            chassis.frontRight.setPower(0.0f);
-            chassis.backRight.setPower(0.0f);
-            telemetry.addData("M:", "All: 0");
+            m.zero();
         }
         telemetry.update();
+    }
+
+    public static boolean isBetween(double a, double b, double c) {
+        return b > a ? c > a && c < b : c > b && c < a;
+        //checks if c is between a and b
     }
 }
