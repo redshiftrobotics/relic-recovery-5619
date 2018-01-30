@@ -1,3 +1,6 @@
 [submodule "TeamCode/src/main/java/org/redshiftrobotics/lib"]
 	path = TeamCode/src/main/java/org/redshiftrobotics/lib
 	url = git@github.com:redshiftrobotics/lib.git
+[submodule "TeamCode/src/main/java/org/TeamCode/src/main/java/org/GhostAutonomousFTC"]
+	path = TeamCode/src/main/java/org/TeamCode/src/main/java/org/GhostAutonomousFTC
+	url = git@github.com:GearedUp9967/GhostAutonomousFTC.git
