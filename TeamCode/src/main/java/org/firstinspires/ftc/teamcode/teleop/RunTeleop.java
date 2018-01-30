@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.util.Range;
 /**
  * Created by zoe on 11/15/17.
  */
-@TeleOp(name = "Run Teleop (Compitition - DEC 3)")
+@TeleOp(name = "Run Teleop (Compitition - DEC 16)")
 public class RunTeleop extends OpMode {
     Chassis chassis = null;
     Movement m = null;
@@ -32,35 +32,51 @@ public class RunTeleop extends OpMode {
 
     @Override
     public void loop() {
-        if (gamepad1.left_trigger == 0 && gamepad1.right_trigger == 0) {
-            //Tank Drive
-            float xValue = gamepad1.left_stick_y;
-            float yValue = gamepad1.right_stick_y;
+        float xValue = gamepad1.left_stick_y;
+        float yValue = gamepad1.right_stick_y;
+        float xValue2 = gamepad2.left_stick_y;
+        float yValue2 = gamepad2.right_stick_y;
 
-            xValue = Range.clip(xValue, -1, 1);
-            yValue = Range.clip(yValue, -1, 1);
+        xValue = Range.clip(xValue, -1, 1);
+        yValue = Range.clip(yValue, -1, 1);
 
-            m.stickDrive(xValue, yValue);
-            //End tank Drive
+        if (isBetween(-0.5, 0.5, gamepad1.right_stick_x) && isBetween(-0.5, 0.5, gamepad1.left_stick_x)) {
+            m.stickDrive(gamepad1.left_stick_y, gamepad1.right_stick_y);
         } else {
-            /*
-            Either left or right is being pushed, now we need to deside which one is being pushed
-             */
-
-            final float leftPower = gamepad1.left_trigger;
-            final float rightPower = gamepad1.right_trigger;
-
-            if(gamepad1.right_stick_y != 0){
-                //Strafe left
-                m.strafeLeft();
-            } else {
-                //Strafe right
-                m.strafeRight();
-            }
+            m.strafeLeft(-gamepad1.left_stick_x);
+            m.turnRight(-gamepad1.right_stick_x);
         }
 
-        if (toggleGlyphServos()) {
-            glyphBool = m.glypeMech(glyphBool);
+        if (gamepad2.a) {
+            if (gamepad2.y) {
+                chassis.glyph.setPower(-0.8f);
+            } else {
+                chassis.glyph.setPower(0.8f);
+            }
+        } else if (gamepad2.x) {
+            if (gamepad2.y) {
+                chassis.glyph.setPower(-0.5f);
+            } else {
+                chassis.glyph.setPower(0.5f);
+            }
+        } else {
+            chassis.glyph.setPower(0f);
+        }
+
+        if (gamepad2.left_bumper){
+            m.intakeLeft(gamepad2.left_stick_y/3);
+        } else if (gamepad2.left_trigger != 0) {
+            m.intakeLeft(gamepad2.left_stick_y);
+        } else {
+            m.zeroIntake();
+        }
+
+        if (gamepad2.right_bumper){
+            m.intakeRight(gamepad2.right_stick_y/3);
+        } else if (gamepad2.right_trigger != 0) {
+            m.intakeRight(gamepad2.right_stick_y);
+        } else {
+            m.zeroIntake();
         }
 
         chassis.loop();
@@ -75,5 +91,10 @@ public class RunTeleop extends OpMode {
         }
         lastBtnStateGlyphServo = gamepad2.a;
         return toggleStateGlyphServo;
+    }
+
+    public static boolean isBetween(double a, double b, double c) {
+        return b > a ? c > a && c < b : c > b && c < a;
+        //checks if c is between a and b
     }
 }
