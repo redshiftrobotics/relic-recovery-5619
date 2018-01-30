@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.utilities;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.*;
 
@@ -12,11 +13,13 @@ import com.qualcomm.robotcore.hardware.*;
 /*
 	Note on how to config
 	Motors:
-	  - Back Left: bl
-	  - Back Right: br
-	  - Front Left: fl
-	  - Front Right: fr
+	  - Back Left: bl (0)
+	  - Back Right: br (1)
+	  - Front Left: fl (2)
+	  - Front Right: fr (3)
 	  - Glyph Motor: glym
+	  - Intake Left: il
+	  - Intake Right: ir
 
 	Servos:
 	  - Glyph Left: glyl
@@ -37,15 +40,20 @@ public class Chassis {
 	public DcMotor frontRight;
 	public DcMotor backLeft;
 	public DcMotor backRight;
-	public DcMotor glyphMotor;
+	public DcMotor intakeLeft;
+	public DcMotor intakeRight;
+	public DcMotor glyph;
 
 	//Servos
-	public Servo glyphLeft;
-	public Servo glyphRight;
+	public Servo glyph1;
+	public Servo glyph2;
 
 	//Sensors
 	//public PixyCam pixyCam = new PixyCam();;
 	//OpticalDistanceSensor distanceSensor;
+
+	//IMU
+	public BNO055IMU imu;
 
 
 
@@ -69,20 +77,44 @@ public class Chassis {
 		frontRight = hardwareMap.dcMotor.get("fr");
 		backLeft = hardwareMap.dcMotor.get("bl");
 		backRight = hardwareMap.dcMotor.get("br");
-		glyphMotor = hardwareMap.dcMotor.get("glym");
+		intakeLeft = hardwareMap.dcMotor.get("il"); //TODO: IMPORTANT: FIXME: FAILING  // just enable
+		intakeRight = hardwareMap.dcMotor.get("ir"); //TODO: IMPORTANT: FIXME: FAILING // just enable
+		glyph = hardwareMap.dcMotor.get("gly"); //TODO: enable me
 
 		//Assuming that the right motors spin the opposite way
 		frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 		backRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
 		//Servos
-		glyphLeft = hardwareMap.servo.get("glyl");
-		glyphRight = hardwareMap.servo.get("glyr");
-		glyphRight.setDirection(Servo.Direction.REVERSE);
+
+//		glyph1 = hardwareMap.servo.get("gly1");
+//		glyph1.setDirection(Servo.Direction.REVERSE);
+//		glyph1.setPosition(0.0);
+//
+//		glyph2 = hardwareMap.servo.get("gly2");
+//		glyph2.setDirection(Servo.Direction.FORWARD);
+//		glyph2.setPosition(0.0);
+
+		//glyph = hardwareMap.servo.get("gly");//TODO: IMPORTANT: FIXME: FAILING  // just enable
+		//glyph.setDirection(Servo.Direction.FORWARD);//TODO: IMPORTANT: FIXME: FAILING  // just enable
+		//glyph.setPosition(0.0); //TODO: IMPORTANT: FIXME: FAILING  // just enable
 
 		//Sensors
 		//pixyCam.initialize(hardwareMap.get(com.qualcomm.robotcore.hardware.I2cDeviceSynch.class, "pixy"));
 		//distanceSensor = hardwareMap.opticalDistanceSensor.get("distance");
+		//IMU
+		BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+		parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+		parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+		parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+		parameters.loggingEnabled      = true;
+		parameters.loggingTag          = "IMU";
+
+		// Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
+		// on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
+		// and named "imu".
+		imu = hardwareMap.get(BNO055IMU.class, "imu");
+		imu.initialize(parameters);
 
 		//Call at the end
 		opMode.telemetry.addData(CHASSIS_TELEMENTRY_IDENTIFIER, "Initialized everything!");

@@ -13,4 +13,8 @@ public class RRMath {
         return power;
     }
 
+    public static boolean isBetween(double a, double b, double c) {
+        return b > a ? c > a && c < b : c > b && c < a;
+        //checks if c is between a and b
+    }
 }
